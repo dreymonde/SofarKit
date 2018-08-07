@@ -1,0 +1,1 @@
+{"object": {"dependencies": [{"basedOn": null, "packageRef": {"identity": "swiftsoup", "isLocal": false, "name": "SwiftSoup", "path": "https://github.com/scinfu/SwiftSoup"}, "state": {"checkoutState": {"branch": null, "revision": "f445c9067d28346e828e615e2b43cb07b20bca35", "version": "1.7.2"}, "name": "checkout"}, "subpath": "SwiftSoup-3625286833408143897"}]}, "version": 2}

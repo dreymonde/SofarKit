@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Light",
+        "repositoryURL": "https://github.com/dreymonde/Light",
+        "state": {
+          "branch": null,
+          "revision": "b43031747872f7c236b7a8b0e0c012c66accf00a",
+          "version": "0.0.3"
+        }
+      },
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "state": {
+          "branch": null,
+          "revision": "797a68d0a642609424b08f11eb56974a54d5f6e2",
+          "version": "3.1.4"
+        }
+      },
+      {
+        "package": "Shallows",
+        "repositoryURL": "https://github.com/dreymonde/Shallows.git",
+        "state": {
+          "branch": null,
+          "revision": "5fecf18b717ba729afc3b45f9de41e9c62a3aaea",
+          "version": "0.9.1"
+        }
+      },
+      {
+        "package": "SwiftSoup",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup",
+        "state": {
+          "branch": null,
+          "revision": "f445c9067d28346e828e615e2b43cb07b20bca35",
+          "version": "1.7.2"
+        }
+      },
+      {
+        "package": "SwiftyTextTable",
+        "repositoryURL": "https://github.com/scottrhoyt/SwiftyTextTable",
+        "state": {
+          "branch": null,
+          "revision": "89728970c0a244c43f29c4155a1b1dc20b3c4633",
+          "version": "0.8.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
