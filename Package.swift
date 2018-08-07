@@ -16,7 +16,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "SofarKit", dependencies: ["SwiftSoup", "Rainbow", "SwiftyTextTable"]),
-        .testTarget(name: "SofarKitTests", dependencies: ["SofarKit"]),
+        .testTarget(name: "SofarKitTests", dependencies: ["SofarKit", "SofarManager", "Light"]),
         .target(name: "SofarManager", dependencies: ["Light", "SofarKit"]),
     ]
 )

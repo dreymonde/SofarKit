@@ -61,7 +61,7 @@ public class SofarManager {
         if setCookies {
             SofarSounds.setCookies(sessionID: cookieSessionID, city: city)
         }
-        self.baseStorage = webAPI.baseURL(SofarSounds.baseURL)
+        self.baseStorage = self.webAPI.baseURL(SofarSounds.baseURL)
     }
     
     public var reportHTML: ReadOnlyStorage<Void, Document> {
@@ -72,7 +72,8 @@ public class SofarManager {
     }
     
     public var report: ReadOnlyStorage<Void, [SofarEventHighlight]> {
-        return reportHTML.mapValues(SofarEventHighlight.sofarEvents(from:))
+        return reportHTML
+            .mapValues(SofarEventHighlight.sofarEvents(from:))
     }
     
     public typealias EventCode = Int
