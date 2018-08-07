@@ -7,6 +7,7 @@ let package = Package(
     name: "SofarKit",
     products: [
         .library(name: "SofarKit", targets: ["SofarKit"]),
+        .library(name: "SofarManager", targets: ["SofarManager"]),
     ],
     dependencies: [
         .package(url: "https://github.com/scinfu/SwiftSoup", from: "1.7.2"),
