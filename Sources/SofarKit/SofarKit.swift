@@ -4,21 +4,27 @@ struct SofarKit {
     var text = "Hello, World!"
 }
 
+public enum SofarKitError : Error {
+    case invalidHTML
+    case notANumber(String)
+    case invalidCookie
+}
+
 extension Optional {
     
-    public func requiredIfValidHTML() -> Wrapped {
-        return required(because: "Invalid HTML".red)
+    public func requiredIfValidHTML() throws -> Wrapped {
+        return try required(orThrow: SofarKitError.invalidHTML)
     }
     
 }
 
 extension String {
     
-    public func requiredNumber() -> Int {
+    public func requiredNumber() throws -> Int {
         if let number = Int(self) {
             return number
         } else {
-            preconditionFailure("Should be number, got \(self) instead".red)
+            throw SofarKitError.notANumber(self)
         }
     }
     
@@ -26,11 +32,11 @@ extension String {
 
 extension Optional {
     
-    public func required(because: String) -> Wrapped {
+    public func required(orThrow error: Error) throws -> Wrapped {
         if let value = self {
             return value
         }
-        preconditionFailure(because)
+        throw error
     }
     
 }

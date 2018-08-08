@@ -11,7 +11,7 @@ extension SofarEvent {
     
     static public func number(in children: [Element], index: Int) throws -> Int {
         let child = children[index]
-        let deeper = child.children().first().requiredIfValidHTML()
+        let deeper = try child.children().first().requiredIfValidHTML()
         return try deeper.text().requiredNumber()
     }
     
@@ -36,7 +36,7 @@ extension SofarEvent {
         return try fas.map({ (element) in
             let classAttr = try element.attr("class")
             let status = checkStatus(from: classAttr)
-            let text = try element.parent()!.text().components(separatedBy: CharacterSet.whitespaces).joined(separator: " ")
+            let text = try element.parent().requiredIfValidHTML().text().components(separatedBy: CharacterSet.whitespaces).joined(separator: " ")
             return SofarEvent.Check(text: text, status: status)
         })
     }
@@ -48,7 +48,7 @@ extension SofarEvent {
         let vips = try number(in: document, select: "span#vip-count")
         let expected = try number(in: document, select: "span#expected-count")
         
-        let parent = goingCountElement.parent().requiredIfValidHTML().parent().requiredIfValidHTML().parent().requiredIfValidHTML()
+        let parent = try goingCountElement.parent().requiredIfValidHTML().parent().requiredIfValidHTML().parent().requiredIfValidHTML()
         
         var children = parent.children().array()
         children.removeFirst()

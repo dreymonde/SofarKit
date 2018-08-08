@@ -14,11 +14,11 @@ extension SofarEventHighlight {
             //        print("")
             
             let eventCodeUnicode = href.unicodeScalars.filter({ CharacterSet.decimalDigits.contains($0) })
-            let eventCode = String(eventCodeUnicode).requiredNumber()
+            let eventCode = try String(eventCodeUnicode).requiredNumber()
             
             let name = text
             
-            let eventElement = link.parent().requiredIfValidHTML()
+            let eventElement = try link.parent().requiredIfValidHTML()
             let eventSiblings = eventElement.siblingElements().array()
             
             let statusElement = eventSiblings[1]
@@ -30,9 +30,9 @@ extension SofarEventHighlight {
             let confirmedElement = eventSiblings[3]
             let confirmed = try confirmedElement.text().requiredNumber()
             
-            let cancan = eventSiblings.reversed()[1].children().first().requiredIfValidHTML()
+            let cancan = try eventSiblings.reversed()[1].children().first().requiredIfValidHTML()
             
-            let canConfirmElement = cancan.children().last().requiredIfValidHTML()
+            let canConfirmElement = try cancan.children().last().requiredIfValidHTML()
                 .children().first().requiredIfValidHTML()
             let canConfirmClass = try canConfirmElement.attr("class")
             

@@ -25,12 +25,12 @@ public enum SofarSounds {
     public static let baseURL = URL(string: "https://www.sofarsounds.com/")!
     
     public static func setCookies(sessionID: String, city: String) {
-        let sofarCookie = HTTPCookie(properties: [
+        let sofarCookie = try! HTTPCookie(properties: [
             .name : "_session_id",
             .value : sessionID,
             .domain : "www.sofarsounds.com",
             .path : "/",
-            ]).required(because: "Cookie should be valid")
+            ]).required(orThrow: SofarKitError.invalidCookie)
         let path: APIPath = .path(forCity: city) + .manage
         let sofarSoundsManageURL = SofarSounds.baseURL.appendingPath(path)
         HTTPCookieStorage.shared.setCookies([sofarCookie], for: sofarSoundsManageURL, mainDocumentURL: nil)
