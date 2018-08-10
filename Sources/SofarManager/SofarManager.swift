@@ -64,6 +64,11 @@ public class SofarManager {
         self.baseStorage = self.webAPI.baseURL(SofarSounds.baseURL)
     }
     
+    public convenience init(city: String, cookieSessionID: String, setCookies: Bool = true) {
+        let webAPI = WebAPI(urlSessionConfiguration: .default)
+        self.init(webAPI: webAPI, city: city, cookieSessionID: cookieSessionID, setCookies: setCookies)
+    }
+    
     public var reportHTML: ReadOnlyStorage<Void, Document> {
         return baseStorage
             .singleKey(.path(forCity: city) + .manage)
