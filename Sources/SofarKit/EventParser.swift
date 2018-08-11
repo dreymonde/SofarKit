@@ -2,7 +2,7 @@ import Rainbow
 import Foundation
 import SwiftSoup
 
-extension SofarEvent {
+extension Event {
     
     static public func number(in document: Document, select query: String) throws -> Int {
         let element = try document.select(query).first().requiredIfValidHTML()
@@ -21,7 +21,7 @@ extension SofarEvent {
         return try eventNameElement.text()
     }
     
-    static public func checkStatus(from classAttr: String) -> SofarEvent.Check.Status {
+    static public func checkStatus(from classAttr: String) -> Event.Check.Status {
         if classAttr.hasSuffix("check") {
             return .check
         } else if classAttr.hasSuffix("times") {
@@ -31,17 +31,17 @@ extension SofarEvent {
         }
     }
     
-    static public func eventChecks(in document: Document) throws -> [SofarEvent.Check] {
+    static public func eventChecks(in document: Document) throws -> [Event.Check] {
         let fas = try document.select("i.fa.fa-check, i.fa.fa-times")
         return try fas.map({ (element) in
             let classAttr = try element.attr("class")
             let status = checkStatus(from: classAttr)
             let text = try element.parent().requiredIfValidHTML().text().components(separatedBy: CharacterSet.whitespaces).joined(separator: " ")
-            return SofarEvent.Check(text: text, status: status)
+            return Event.Check(text: text, status: status)
         })
     }
     
-    static public func event(from document: Document, eventID: Int) throws -> SofarEvent {
+    static public func event(from document: Document, eventID: Int) throws -> Event {
         let goingCountElement = try document.select("span#going-count").first().requiredIfValidHTML()
         let going = try goingCountElement.text().requiredNumber()
         
@@ -66,11 +66,11 @@ extension SofarEvent {
         
         let checks = try eventChecks(in: document)
         
-        let event = SofarEvent(code: id, name: name, going: going, vips: vips, expected: expected, venueCap: venueCap, applied: applied, invited: invited, confirmedNo: confirmedNo, notConfirmed: notConfirmed, confirmedYes: confirmedYes, ticketsSold: ticketsSold, checks: checks)
+        let event = Event(code: id, name: name, going: going, vips: vips, expected: expected, venueCap: venueCap, applied: applied, invited: invited, confirmedNo: confirmedNo, notConfirmed: notConfirmed, confirmedYes: confirmedYes, ticketsSold: ticketsSold, checks: checks)
         return event
     }
     
-    static public func checkDescription(_ check: SofarEvent.Check) -> String {
+    static public func checkDescription(_ check: Event.Check) -> String {
         switch check.status {
         case .check:
             return "✅ \(check.text)"
@@ -79,7 +79,7 @@ extension SofarEvent {
         }
     }
     
-    static public func eventDescription(_ event: SofarEvent, withChecks: Bool) -> String {
+    static public func eventDescription(_ event: Event, withChecks: Bool) -> String {
         let main = """
         
         \(event.name.bold)

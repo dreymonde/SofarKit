@@ -1,5 +1,5 @@
 
-public struct SofarEvent {
+public struct Event {
     
     public let code: Int
     public let name: String

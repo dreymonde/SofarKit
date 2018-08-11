@@ -2,9 +2,9 @@
 import SwiftSoup
 import Foundation
 
-extension SofarEventHighlight {
+extension EventHighlight {
     
-    public static func sofarEvent(from link: Element) throws -> SofarEventHighlight? {
+    public static func highlight(from link: Element) throws -> EventHighlight? {
         let href = try link.attr("href")
         if href.hasPrefix("/events/"), let text = try? link.text(), !text.isEmpty {
             
@@ -43,23 +43,23 @@ extension SofarEventHighlight {
                 canConfirm = true
             }
             
-            let eventHighlight = SofarEventHighlight(code: eventCode, name: name, status: status, applied: applied, confirmed: confirmed, canConfirm: canConfirm)
+            let eventHighlight = EventHighlight(code: eventCode, name: name, status: status, applied: applied, confirmed: confirmed, canConfirm: canConfirm)
             return eventHighlight
         } else {
             return nil
         }
     }
     
-    public static func sofarEvents(from htmlDocument: Document) throws -> [SofarEventHighlight] {
+    public static func highlights(from htmlDocument: Document) throws -> [EventHighlight] {
         let links = try htmlDocument.select("a")
-        return try links.compactMap(sofarEvent(from:))
+        return try links.compactMap(highlight(from:))
     }
     
 }
 
-extension Collection where Element == SofarEventHighlight {
+extension Collection where Element == EventHighlight {
     
-    public func relevant() -> [SofarEventHighlight] {
+    public func relevant() -> [EventHighlight] {
         return self.filter({ $0.canConfirm })
     }
     

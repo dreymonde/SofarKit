@@ -76,9 +76,9 @@ public class SofarManager {
             .mapHTMLDocument()
     }
     
-    public var report: ReadOnlyStorage<Void, [SofarEventHighlight]> {
+    public var report: ReadOnlyStorage<Void, [EventHighlight]> {
         return reportHTML
-            .mapValues(SofarEventHighlight.sofarEvents(from:))
+            .mapValues(EventHighlight.highlights(from:))
     }
     
     public typealias EventCode = Int
@@ -90,10 +90,10 @@ public class SofarManager {
             .mapHTMLDocument()
     }
     
-    public func event(withCode code: EventCode) -> ReadOnlyStorage<Void, SofarEvent> {
+    public func event(withCode code: EventCode) -> ReadOnlyStorage<Void, Event> {
         return eventsHTML
             .singleKey(code)
-            .mapValues({ try SofarEvent.event(from: $0, eventID: code) })
+            .mapValues({ try Event.event(from: $0, eventID: code) })
     }
     
 }

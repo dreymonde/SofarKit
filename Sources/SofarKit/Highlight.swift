@@ -1,6 +1,6 @@
 import SwiftyTextTable
 
-public struct SofarEventHighlight {
+public struct EventHighlight {
     
     public let code: Int
     public let name: String
@@ -20,7 +20,7 @@ public struct SofarEventHighlight {
     
 }
 
-extension SofarEventHighlight : TextTableRepresentable {
+extension EventHighlight : TextTableRepresentable {
     
     public static var columnHeaders: [String] {
         return ["code", "Date", "Applied", "Confirmed"]
